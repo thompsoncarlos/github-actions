@@ -16,16 +16,22 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      name: C Thompson
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    name: Build Project
     steps:
-      - name: Run a one-line script
-        run: |
-          echo Hello, $name!
-          echo Actor: ${{ github.actor }}
-          echo Commited By:: ${{ github.event.commits[0].author.name }}
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with: 
+          node-version: '12.x'
+      - name: install
+        run: npm install
+      - name: build
+        run: npm run build
+      - name: deploy
+        uses: demurgos/ga-deploy-git@v3
+        with:
+          accessToken: ${{ secrets.access_token }}
+          srcDir: build
+          destBranch: gh-pages
              
   dump:
     runs-on: ubuntu-latest

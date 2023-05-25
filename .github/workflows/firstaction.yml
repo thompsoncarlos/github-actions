@@ -17,7 +17,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      name: Thompson
+      name: C Thompson
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
